@@ -10,6 +10,10 @@ i18n.use(initReactI18next).init({
         searchPlaceholder: 'Search movies...',
         loading: 'Loading...',
         error: 'Error fetching movies. Please try again later.',
+        allGenres: 'All Genres',
+        allYears: 'All Years',
+        anyRating: 'Any Rating',
+        reset: 'Reset',
       }
     },
     ar: {
@@ -19,6 +23,10 @@ i18n.use(initReactI18next).init({
         searchPlaceholder: 'ابحث عن أفلام...',
         loading: 'جاري التحميل...',
         error: 'حدث خطأ. يرجى المحاولة مرة أخرى.',
+        allGenres: 'جميع الأنواع',
+        allYears: 'جميع السنوات',
+        anyRating: 'أي تقييم',
+        reset: 'إعادة تعيين',
       }
     }
   },

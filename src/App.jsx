@@ -8,6 +8,8 @@ import MovieCard from "./components/MovieCard";
 import Pagination from "./components/Pagination";
 import ThemeToggle from "./components/ThemeToggle";
 import LanguageToggle from './components/LanguageToggle';
+import FilterForm from './components/FilterForm';
+
 
 const API_BASE_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -22,6 +24,7 @@ const API_OPTIONS = {
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedsearchTerm, setDebouncedSearchTerm] = useState('');
+
   const [errorMessage, setErrorMessage] = useState('');
   const [movieList, setMovieList] = useState([]);
   const [isLoding, setIsLoding] = useState(false);
@@ -33,15 +36,43 @@ const App = () => {
   // Translation
   const { t, i18n } = useTranslation();
 
+  // Filter
+  const [genres, setGenres] = useState([]);
+  const [filters, setFilters] = useState({
+    genre: '',
+    year: '',
+    minRating: ''
+  });
+
   useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm]);
+
+  const fetchGenres = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}genre/movie/list`, API_OPTIONS);
+      const data = await response.json();
+      setGenres(data.genres || []);
+    } catch (error) {
+      console.log('Error fetching genres:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGenres();
+  }, []);
 
   const fetchMovies = async (query = '', page = 1) => {
     setIsLoding(true);
     setErrorMessage('');
 
     try {
-      const endpoint = query? `${API_BASE_URL}search/movie?query=${encodeURIComponent(query)}&page=${page}` 
-                            : `${API_BASE_URL}discover/movie?sort_by=popularity.desc&page=${page}`;
+      const params = new URLSearchParams({
+        sort_by: 'popularity.desc',
+        page,
+        ...(filters.genre && { with_genres: filters.genre }),
+        ...(filters.year && { primary_release_year: filters.year }),
+        ...(filters.minRingRating && { 'vote_average.gte': filters.minRating }),
+      });
+      const endpoint = `${API_BASE_URL}discover/movie?${params}`;
       const response = await fetch(endpoint, API_OPTIONS);
 
       if(!response.ok){
@@ -69,12 +100,12 @@ const App = () => {
 
   useEffect(() => {
     fetchMovies(debouncedsearchTerm, currentPage);
-  }, [debouncedsearchTerm, currentPage]);
+  }, [debouncedsearchTerm, currentPage, filters]);
 
   // Reset to page 1 whenever the search term changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedsearchTerm]);
+  }, [debouncedsearchTerm, filters]);
 
   return (
     <main>
@@ -88,6 +119,7 @@ const App = () => {
           <img src="/hero-img.png" alt="Movies Posters" />
           <h1>{t('title')}</h1>
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <FilterForm filters={filters} setFilters={setFilters} genres={genres} />
         </header>
 
         <section className="all-movies">

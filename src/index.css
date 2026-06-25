@@ -214,6 +214,20 @@
   .theme-toggle {
     @apply fixed top-5 right-5 z-50 px-4 py-2 rounded-full bg-light-100/10 text-light hover:bg-light-100/20 transition text-sm font-medium;
   }
+
+  .filter-form {
+    @apply flex flex-wrap gap-3 justify-center mt-5 max-w-3xl mx-auto;
+  }
+
+  .filter-form select {
+    @apply bg-dark-100 text-light px-4 py-2 rounded-lg border border-light-100/10 
+           hover:border-light-100/30 transition cursor-pointer outline-none text-sm;
+  }
+
+  .filter-form button {
+    @apply px-4 py-2 rounded-lg bg-light-100/10 text-light hover:bg-light-100/20 
+           transition text-sm font-medium;
+  }
 }
 
 @utility text-gradient {
