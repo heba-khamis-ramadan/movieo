@@ -1,0 +1,31 @@
+@utility text-gradient {
+  @apply bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent;
+}
+
+[data-theme="barbie"] .text-gradient {
+  background-image: linear-gradient(to right, #ff4fa3, #ff7abf, #ffc1de);
+  @apply bg-clip-text text-transparent;
+}
+
+[data-theme="forest"] .text-gradient {
+  background-image: linear-gradient(to right, #10b981, #34d399, #6ee7b7);
+  @apply bg-clip-text text-transparent;
+}
+
+[data-theme="light"] .text-gradient {
+  background-image: linear-gradient(to right, #4f46e5, #6366f1, #9798ec);
+  @apply bg-clip-text text-transparent;
+}
+
+@utility fancy-text {
+  -webkit-text-stroke: 5px rgba(206, 206, 251, 0.5);
+  font-size: 190px;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+@utility hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+}

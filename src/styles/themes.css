@@ -1,0 +1,39 @@
+[data-theme="light"] {
+  --color-primary: #f5f5ff;
+  --color-dark-100: #e8e8f8;
+  --color-light-100: #6060cc;
+  --color-light-200: #4a4a99;
+  --color-gray-100: #555566;
+  --color-gray-200: #474752;
+  --text-light: #4a4a99;
+}
+
+[data-theme="barbie"] {
+  --color-primary: #fff0f7;
+  --color-dark-100: #ffffff;
+  --color-light-100: #ff4fa3;
+  --color-light-200: #ff8ac3;
+  --color-gray-100: #8a5672;
+  --color-gray-200: #4b2040;
+  --text-light: #4b2040;
+}
+
+[data-theme="cinema"] {
+  --color-primary: #0f0f0f;
+  --color-dark-100: #1a1a1a;
+  --color-light-100: #d4af37;
+  --color-light-200: #f4d03f;
+  --color-gray-100: #b0b0b0;
+  --color-gray-200: #f5f5f5;
+  --text-light: #ffffff;
+}
+
+[data-theme="forest"] {
+  --color-primary: #0f1720;
+  --color-dark-100: #1b2a24;
+  --color-light-100: #10b981;
+  --color-light-200: #34d399;
+  --color-gray-100: #9ca3af;
+  --color-gray-200: #d1d5db;
+  --text-light: #f0fdf4;
+}
