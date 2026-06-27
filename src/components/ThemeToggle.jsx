@@ -15,6 +15,10 @@ const ThemeToggle = () => {
       label: `☀️ ${t("light")}`,
     },
     {
+      id: "cinema",
+      label: `🎬 ${t("cinema")}`,
+    },
+    {
       id: "forest",
       label: `🍃 ${t("forest")}`,
     },
