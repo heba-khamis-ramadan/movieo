@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Spinner from '../components/Spinner';
 
@@ -15,6 +15,7 @@ const API_OPTIONS = {
 
 const MovieDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,9 +48,9 @@ const MovieDetails = () => {
       <div className="wrapper">
 
         {/* Back button */}
-        <Link to="/" className="back-btn">
+        <button className="back-btn" onClick={() => navigate(-1)}>
           ← {t('back')}
-        </Link>
+        </button>
 
         <div className="movie-details">
           {/* Poster */}

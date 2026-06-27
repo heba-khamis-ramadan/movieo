@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDebounce } from 'react-use';
 
 const API_BASE_URL = 'https://api.themoviedb.org/3/';
@@ -12,17 +12,34 @@ const API_OPTIONS = {
 };
 
 const useMovies = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(() => sessionStorage.getItem('searchTerm') || '');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(() => sessionStorage.getItem('searchTerm') || '');
   const [errorMessage, setErrorMessage] = useState('');
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(() => parseInt(sessionStorage.getItem('currentPage') || '1'));
   const [totalPages, setTotalPages] = useState(1);
   const [genres, setGenres] = useState([]);
-  const [filters, setFilters] = useState({ genre: '', year: '', minRating: '' });
+  const [filters, setFilters] = useState(() => JSON.parse(sessionStorage.getItem('filters') || '{"genre":"","year":"","minRating":""}'));
+
+  const isFirstRender = useRef(true);
 
   useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm]);
+
+  // reset page only when search or filters actually change (not on first mount)
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    setCurrentPage(1);
+    sessionStorage.setItem('currentPage', '1');
+  }, [debouncedSearchTerm, filters]);
+
+  // save to sessionStorage whenever these change
+  useEffect(() => { sessionStorage.setItem('currentPage', currentPage); }, [currentPage]);
+  useEffect(() => { sessionStorage.setItem('searchTerm', searchTerm); }, [searchTerm]);
+  useEffect(() => { sessionStorage.setItem('filters', JSON.stringify(filters)); }, [filters]);
 
   const fetchGenres = async () => {
     try {
@@ -64,7 +81,6 @@ const useMovies = () => {
 
   useEffect(() => { fetchGenres(); }, []);
   useEffect(() => { fetchMovies(debouncedSearchTerm, currentPage); }, [debouncedSearchTerm, currentPage, filters]);
-  useEffect(() => { setCurrentPage(1); }, [debouncedSearchTerm, filters]);
 
   return {
     searchTerm, setSearchTerm,

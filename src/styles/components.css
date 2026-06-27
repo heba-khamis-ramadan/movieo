@@ -87,7 +87,7 @@
 
   /* ---- Movie Details ---- */
   .movie-details-page { @apply min-h-screen bg-primary; }
-  .back-btn { @apply inline-block text-light-200 hover:text-light transition mb-8 text-sm font-medium; }
+  .back-btn { @apply inline-block self-start text-light-200 hover:text-light transition mb-8 text-sm font-medium; }
   .movie-details { @apply flex flex-col md:flex-row gap-10 mt-10; }
   .movie-details-poster { @apply w-full md:w-[300px] rounded-2xl object-cover shadow-lg flex-shrink-0; }
 
