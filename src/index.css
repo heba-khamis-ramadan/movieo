@@ -228,6 +228,54 @@
     @apply px-4 py-2 rounded-lg bg-light-100/10 text-light hover:bg-light-100/20 
            transition text-sm font-medium;
   }
+
+  .movie-details-page {
+    @apply min-h-screen bg-primary;
+  }
+
+  .back-btn {
+    @apply inline-block text-light-200 hover:text-light transition mb-8 text-sm font-medium;
+  }
+
+  .movie-details {
+    @apply flex flex-col md:flex-row gap-10 mt-10;
+  }
+
+  .movie-details-poster {
+    @apply w-full md:w-[300px] rounded-2xl object-cover shadow-lg flex-shrink-0;
+  }
+
+  .movie-details-info {
+    @apply flex flex-col gap-5;
+
+    & h1 {
+      @apply text-4xl font-bold text-light;
+    }
+  }
+
+  .movie-details-meta {
+    @apply flex flex-wrap gap-2 text-gray-100 text-sm items-center;
+  }
+
+  .movie-details-genres {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .genre-tag {
+    @apply px-3 py-1 rounded-full bg-light-100/10 text-light-100 text-sm;
+  }
+
+  .movie-details-overview {
+    @apply text-gray-100 leading-relaxed text-base;
+  }
+
+  .movie-details-extra {
+    @apply flex flex-col gap-2 text-gray-100 text-sm border-t border-light-100/10 pt-5;
+
+    & span {
+      @apply text-light font-semibold;
+    }
+  }
 }
 
 @utility text-gradient {

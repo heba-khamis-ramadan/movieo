@@ -18,6 +18,13 @@ i18n.use(initReactI18next).init({
         light: 'Light',
         forest: 'Forest',
         barbie: 'Barbie',
+        back: 'Back',
+        minutes: 'min',
+        language: 'Language',
+        status: 'Status',
+        budget: 'Budget',
+        revenue: 'Revenue',
+        notAvailable: 'N/A',
       }
     },
     ar: {
@@ -35,6 +42,13 @@ i18n.use(initReactI18next).init({
         light: 'فاتح',
         forest: 'غابة',
         barbie: 'باربي',
+        back: 'رجوع',
+        minutes: 'دقيقة',
+        language: 'اللغة',
+        status: 'الحالة',
+        budget: 'الميزانية',
+        revenue: 'الإيرادات',
+        notAvailable: 'غير متاح',
       }
     }
   },

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
+import { Routes, Route } from 'react-router-dom';
 import { useDebounce } from "react-use";
 import { useTranslation } from 'react-i18next';
 import './i18n';
+import MovieDetails from './pages/MovieDetails';
 import Search from "./components/Search"
 import Spinner from "./components/Spinner";
 import MovieCard from "./components/MovieCard";
@@ -21,7 +23,7 @@ const API_OPTIONS = {
                       }
                     };
 
-const App = () => {
+const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedsearchTerm, setDebouncedSearchTerm] = useState('');
 
@@ -142,6 +144,15 @@ const App = () => {
       </div>
     </main>
   )
+}
+
+const App = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/movie/:id" element={<MovieDetails />} />
+    </Routes>
+  );
 }
 
 export default App
